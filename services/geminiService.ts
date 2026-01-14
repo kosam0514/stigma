@@ -2,8 +2,8 @@ import { GoogleGenAI, Chat } from "@google/genai";
 import { Character } from "../types";
 import { SYSTEM_PROMPT_TEMPLATE } from "../constants";
 
-// Assuming API_KEY is available in the environment
-const API_KEY = process.env.API_KEY || '';
+// Safely access process.env to prevent crashes in environments where process is undefined
+const API_KEY = (typeof process !== 'undefined' && process.env && process.env.API_KEY) || '';
 
 const getSystemInstruction = (character: Character): string => {
   return SYSTEM_PROMPT_TEMPLATE
