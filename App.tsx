@@ -7,6 +7,7 @@ const App: React.FC = () => {
   const [viewState, setViewState] = useState<ViewState>(ViewState.CHARACTER_SELECTION);
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [archiveScrollPos, setArchiveScrollPos] = useState(0);
 
   const handleCharacterSelect = (character: Character) => {
     setSelectedCharacter(character);
@@ -22,8 +23,13 @@ const App: React.FC = () => {
     setIsModalOpen(true);
   };
 
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setArchiveScrollPos(0); // Reset scroll position when closing the modal completely
+  };
+
   return (
-    <div className="min-h-screen bg-black text-neutral-300 selection:bg-red-900 selection:text-white font-serif overflow-x-hidden">
+    <div className="min-h-screen bg-transparent text-neutral-300 selection:bg-red-900 selection:text-white font-serif overflow-x-hidden">
       {/* CRT Scanline Overlay */}
       <div className="fixed inset-0 z-0 pointer-events-none crt-overlay opacity-30"></div>
 
@@ -32,8 +38,8 @@ const App: React.FC = () => {
           
           {/* Main Hero Section */}
           <section className="relative flex-1 flex flex-col items-center justify-center p-6 text-center z-10">
-            {/* Background Texture */}
-            <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-red-900/20 via-black to-black"></div>
+            {/* Background Texture with Red Hint */}
+            <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-red-950/40 via-black to-black"></div>
             
             <div className="z-20 w-full max-w-7xl space-y-16 animate-fade-in flex flex-col items-center">
               
@@ -44,13 +50,13 @@ const App: React.FC = () => {
                 </h2>
                 <h1 className="font-black text-6xl md:text-9xl text-white tracking-tighter drop-shadow-2xl leading-[0.9]">
                   STIGMA<br/>
-                  <span className="text-red-900">ACADEMY</span>
+                  <span className="text-red-900 text-shadow-glow">ACADEMY</span>
                 </h1>
               </div>
 
               {/* Description & Warnings */}
               <div className="max-w-4xl mx-auto space-y-8">
-                <div className="border border-red-900/30 bg-black/50 backdrop-blur-sm p-8 relative overflow-hidden group select-none">
+                <div className="border border-red-900/30 bg-black/60 backdrop-blur-sm p-8 relative overflow-hidden group select-none shadow-[0_0_30px_rgba(153,0,0,0.1)]">
                    <div className="absolute top-0 left-0 w-1 h-full bg-red-600"></div>
                    <div className="absolute top-0 right-0 w-1 h-full bg-red-600"></div>
                    
@@ -76,7 +82,7 @@ const App: React.FC = () => {
               <div className="pt-4 pb-20 z-30 relative">
                  <button 
                    onClick={() => setIsModalOpen(true)}
-                   className="group relative inline-block px-16 py-6 bg-transparent border-2 border-neutral-800 text-neutral-300 font-mono-tech text-xl tracking-[0.2em] uppercase hover:border-red-600 hover:text-red-500 hover:bg-red-950/10 transition-all duration-500 cursor-pointer"
+                   className="group relative inline-block px-16 py-6 bg-black/40 border-2 border-neutral-800 text-neutral-300 font-mono-tech text-xl tracking-[0.2em] uppercase hover:border-red-600 hover:text-red-500 hover:bg-red-950/20 transition-all duration-500 cursor-pointer backdrop-blur-sm shadow-[0_0_20px_rgba(0,0,0,0.5)]"
                  >
                    <span className="relative z-10 pointer-events-none">[ ACCESS DATABASE ]</span>
                    {/* Glitch effect lines */}
@@ -98,8 +104,10 @@ const App: React.FC = () => {
           {/* Unique Modal Component */}
           <ArchiveModal 
             isOpen={isModalOpen} 
-            onClose={() => setIsModalOpen(false)} 
-            onSelectCharacter={handleCharacterSelect} 
+            onClose={handleCloseModal} 
+            onSelectCharacter={handleCharacterSelect}
+            savedScrollTop={archiveScrollPos}
+            onRecordScroll={setArchiveScrollPos}
           />
 
         </main>

@@ -21,7 +21,9 @@ const CharacterDossier: React.FC<CharacterDossierProps> = ({ character, onBack }
   }
 
   return (
-    <div className="flex h-screen w-full flex-col bg-black text-neutral-300 font-serif overflow-hidden relative">
+    <div className="flex h-screen w-full flex-col bg-transparent text-neutral-300 font-serif overflow-hidden relative">
+      {/* Subtle Red Gradient Overlay for this specific view */}
+      <div className="absolute inset-0 bg-gradient-to-b from-red-950/10 via-black/50 to-black z-0 pointer-events-none"></div>
       <div className="fixed inset-0 z-0 pointer-events-none crt-overlay opacity-20"></div>
 
       {/* Image Zoom Modal */}
@@ -44,19 +46,24 @@ const CharacterDossier: React.FC<CharacterDossierProps> = ({ character, onBack }
       )}
 
       {/* Header */}
-      <header className={`relative z-10 flex items-center justify-between border-b bg-neutral-950/90 p-4 ${borderColor}`}>
+      <header className={`relative z-10 flex items-center justify-between border-b bg-neutral-950/80 p-4 ${borderColor} backdrop-blur-sm`}>
         <button 
             onClick={onBack}
-            className="group flex items-center gap-2 text-neutral-500 hover:text-white transition-colors"
+            className={`group flex items-center gap-3 transition-all duration-300 border ${borderColor} bg-black/50 px-4 py-2 hover:bg-red-900/20`}
         >
-            <span className="font-mono-tech text-xl">{'<'}</span>
-            <span className="font-mono-tech text-xs tracking-[0.2em] border border-neutral-800 px-3 py-1 group-hover:border-neutral-500">
-                DISCONNECT_NEURAL_LINK
-            </span>
+            <span className="font-mono-tech text-xl group-hover:-translate-x-1 transition-transform">{'<'}</span>
+            <div className="flex flex-col items-start">
+                <span className="font-mono-tech text-xs tracking-[0.2em] font-bold text-neutral-400 group-hover:text-white">
+                    RETURN TO ARCHIVE
+                </span>
+                <span className="text-[10px] text-red-800 tracking-widest opacity-70 group-hover:opacity-100">
+                    DISCONNECT_LINK
+                </span>
+            </div>
         </button>
         <div className="flex items-center gap-3">
              <div className="h-2 w-2 rounded-full bg-red-600 animate-pulse"></div>
-             <span className="font-mono-tech text-xs text-red-600 tracking-widest">SECURE_CONNECTION_ESTABLISHED</span>
+             <span className="font-mono-tech text-xs text-red-600 tracking-widest hidden sm:inline">SECURE_CONNECTION_ESTABLISHED</span>
         </div>
       </header>
 
@@ -106,13 +113,13 @@ const CharacterDossier: React.FC<CharacterDossierProps> = ({ character, onBack }
                         <span>//</span>
                         <span className={isFaculty ? 'text-amber-700' : 'text-red-700'}>CLASS: {character.group.toUpperCase()}</span>
                     </div>
-                    <h1 className="text-5xl md:text-8xl font-black text-white tracking-tighter leading-none mb-6">
+                    <h1 className="text-5xl md:text-8xl font-black text-white tracking-tighter leading-none mb-6 drop-shadow-[0_0_15px_rgba(255,0,0,0.15)]">
                         {character.name}
                     </h1>
                 </div>
 
                 {/* Vital Stats Grid */}
-                <div className="grid grid-cols-3 gap-0 border border-neutral-800">
+                <div className="grid grid-cols-3 gap-0 border border-neutral-800 bg-black/40">
                     <div className="p-4 border-r border-neutral-800 text-center">
                         <span className="block font-mono-tech text-[10px] text-neutral-600 uppercase tracking-widest mb-1">Age</span>
                         <span className="font-bold text-xl text-neutral-200">{character.age}</span>
@@ -123,7 +130,7 @@ const CharacterDossier: React.FC<CharacterDossierProps> = ({ character, onBack }
                     </div>
                     <div className={`p-4 text-center ${bgColor}`}>
                         <span className="block font-mono-tech text-[10px] text-neutral-600 uppercase tracking-widest mb-1">Risk Level</span>
-                        <span className={`font-bold text-xl ${themeColor}`}>
+                        <span className={`font-bold text-sm sm:text-xl ${themeColor}`}>
                              {character.group === 'faculty' ? 'AUTHORITY' : 'EXTREME'}
                         </span>
                     </div>
@@ -153,7 +160,7 @@ const CharacterDossier: React.FC<CharacterDossierProps> = ({ character, onBack }
                 <div className="pt-4 pb-8 lg:pb-0">
                     <button 
                         onClick={() => setShowChat(true)}
-                        className={`w-full py-5 border border-neutral-800 font-mono-tech text-xl tracking-[0.2em] uppercase transition-all duration-300 hover:bg-neutral-900/80 ${isFaculty ? 'hover:text-amber-500 hover:border-amber-900' : 'hover:text-red-500 hover:border-red-900'} relative overflow-hidden group`}
+                        className={`w-full py-5 border border-neutral-800 font-mono-tech text-xl tracking-[0.2em] uppercase transition-all duration-300 hover:bg-neutral-900/80 ${isFaculty ? 'hover:text-amber-500 hover:border-amber-900' : 'hover:text-red-500 hover:border-red-900'} relative overflow-hidden group shadow-[0_0_30px_rgba(0,0,0,0.5)]`}
                     >
                         <span className="relative z-10">[ INITIATE NEURAL LINK ]</span>
                         <div className={`absolute top-0 left-0 w-1 h-full ${isFaculty ? 'bg-amber-800' : 'bg-red-800'} transform scale-y-0 group-hover:scale-y-100 transition-transform origin-bottom duration-300`}></div>

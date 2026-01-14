@@ -133,7 +133,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ character, onBack }) => {
               className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}
             >
               <div 
-                className={`max-w-[90%] sm:max-w-[75%] p-4 leading-relaxed whitespace-pre-wrap text-sm sm:text-base ${
+                className={`max-w-[90%] sm:max-w-[75%] p-4 leading-relaxed whitespace-pre-wrap text-base sm:text-lg ${
                   isUser 
                     ? 'bg-neutral-900 border border-neutral-700 text-neutral-300' 
                     : `bg-black border-l-2 ${chatBubbleBorder} text-neutral-400 pl-4`
@@ -163,7 +163,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ character, onBack }) => {
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder={isFaculty ? "답변을 입력하십시오..." : "행동이나 대사를 입력하세요..."}
-            className={`w-full bg-black border p-4 pr-16 text-neutral-300 placeholder-neutral-700 focus:outline-none transition-all font-serif ${
+            className={`w-full bg-black border p-4 pr-16 text-neutral-300 placeholder-neutral-700 focus:outline-none transition-all font-serif text-base sm:text-lg ${
               isFaculty 
               ? 'border-neutral-800 focus:border-amber-900' 
               : 'border-neutral-800 focus:border-red-900'
