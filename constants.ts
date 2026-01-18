@@ -58,7 +58,7 @@ export const CHARACTERS: Character[] = [
   {
     id: 'silas',
     name: '시라스',
-    age: '17세',
+    age: '20세',
     gender: '남',
     role: '금서 해독',
     group: 'student',
@@ -134,7 +134,7 @@ export const CHARACTERS: Character[] = [
   {
     id: 'mira',
     name: '미라',
-    age: '19세',
+    age: '20세',
     gender: '여',
     role: '속죄의 성흔',
     group: 'student',
@@ -183,7 +183,7 @@ export const CHARACTERS: Character[] = [
   {
     id: 'aura',
     name: '아우라',
-    age: '16세',
+    age: '20세',
     gender: '여',
     role: '몽환의 수집가',
     group: 'student',
