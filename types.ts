@@ -1,15 +1,21 @@
+export interface GalleryItem {
+  url: string;
+  description: string;
+}
+
 export interface Character {
   id: string;
   name: string;
   age: string;
   gender: string;
   role: string; // Role or Alias (이명)
-  group: 'faculty' | 'student'; // Grouping for UI separation
+  group: 'faculty' | 'student' | 'creature' | 'boss'; // Added boss
   appearance: string;
   personality: string;
   dialogueStyle: string;
   description: string;
   avatarUrl: string;
+  gallery: GalleryItem[]; // Updated to support descriptions
   quote: string; // Representative dialogue
 }
 
